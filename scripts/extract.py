@@ -1,3 +1,8 @@
+"""
+Simulação de extração de dados a partir de query SQL,
+representando execução em banco relacional.
+"""
+
 import pandas as pd
 import os
 
