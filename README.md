@@ -1,9 +1,7 @@
 # Pipeline de Dados - Rotatividade de Kits
 
 ## 📌 Descrição
-Este projeto consiste na construção de um pipeline de dados completo para extração, transformação e disponibilização de dados para análise de rotatividade de kits.
-
-O pipeline foi estruturado com foco em automação, padronização e rastreabilidade dos dados, permitindo o consumo confiável via Power BI.
+Este projeto apresenta o desenvolvimento de um pipeline de dados completo (ETL) utilizando Python, com foco em automação, padronização e disponibilização de dados para análise em Power BI.
 
 ---
 
@@ -15,20 +13,34 @@ O pipeline foi estruturado com foco em automação, padronização e rastreabili
 
 ---
 
+## ▶️ Como executar o projeto
+
+1. Navegue até a pasta `scripts`
+2. Execute:
+
+python main.py
+
+O pipeline irá:
+- simular a extração de dados via SQL
+- aplicar transformações
+- gerar arquivo de saída na pasta `output`
+
+---
+
 ## 🧠 Arquitetura do Pipeline
 
 ```
 Oracle (OLTP)
    ↓
-Extração via SQL
+SQL Extraction
    ↓
 RAW Layer
    ↓
-Transformação (Python)
+Python Transformation
    ↓
 SILVER Layer
    ↓
-Regras de Negócio
+Business Rules
    ↓
 GOLD Layer
    ↓
@@ -42,23 +54,17 @@ Power BI
 ```
 rotatividade_kits/
 │
-├── 01_sql
-│   └── raw/
-│
-├── 02_scripts_python
-│   ├── extract_kits.py
-│   ├── transform_kits.py
-│   ├── load_kits.py
+├── scripts
+│   ├── extract.py
+│   ├── transform.py
+│   ├── load.py
 │   └── main.py
 │
-├── 03_dados
-│   ├── raw
-│   ├── staging
-│   └── gold
+├── sql
+│   └── exemplo_query.sql
 │
-├── 04_logs
-│
-└── 05_powerbi
+├── data_sample
+│   └── exemplo.csv
 ```
 
 ---
@@ -77,9 +83,9 @@ rotatividade_kits/
 
 ### 1. Extract
 Responsável por:
-- Conectar ao banco Oracle
-- Executar queries SQL
-- Gerar arquivos na camada RAW (CSV e Parquet)
+- Leitura de query SQL
+- Simulação de execução em banco relacional
+- Geração de dados para processamento
 
 Script: `extract_kits.py`
 
@@ -144,6 +150,7 @@ Solução:
 O pipeline foi automatizado utilizando:
 - Executável Python (.exe)
 - Windows Task Scheduler
+- Integração com Power BI via gateway para atualização automática dos dados
 
 Fluxo:
 
@@ -167,6 +174,12 @@ Atualização dos dashboards
 - Redução de processos manuais
 - Base padronizada para análise
 - Integração com Power BI
+
+---
+
+## 💡 Considerações
+
+Este projeto demonstra a implementação de um pipeline de dados em ambiente próximo ao corporativo, com separação de camadas, aplicação de regras de negócio e automação do fluxo de dados.
 
 ---
 
