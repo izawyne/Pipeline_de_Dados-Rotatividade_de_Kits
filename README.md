@@ -20,10 +20,11 @@ Este projeto apresenta o desenvolvimento de um pipeline de dados completo (ETL) 
 
 python main.py
 
-O pipeline irá:
-- simular a extração de dados via SQL
-- aplicar transformações
-- gerar arquivo de saída na pasta `output`
+O pipeline segue o fluxo:
+Extract → Transform → Load
+
+Executado via:
+python main.py
 
 ---
 
