@@ -1,3 +1,6 @@
+-- Query de exemplo utilizada para extração de dados
+-- Adaptada para fins de portfólio (sem dados reais)
+
 SELECT
     id_pedido,
     cod_cliente,
