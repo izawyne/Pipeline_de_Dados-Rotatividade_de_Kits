@@ -39,7 +39,7 @@ Power BI Dashboards
 ---
  
 ## 📂 Project Structure
-
+```
 rotatividade_kits/
 │
 ├── scripts/
@@ -61,7 +61,7 @@ rotatividade_kits/
 ├── logs/
 │
 └── dashboard/
-
+```
 ---
 
 ## ⚙️ Tech Stack
@@ -148,7 +148,6 @@ Power BI Gateway
    ↓
 Automated Dashboard Refresh
 ```
-
 ---
 
 ## 📈 Results
