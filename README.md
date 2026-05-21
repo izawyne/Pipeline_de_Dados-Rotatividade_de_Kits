@@ -1,197 +1,173 @@
-# Pipeline de Dados - Rotatividade de Kits
+# End-to-End Data Pipeline with Medallion Architecture and Automated Data Delivery
 
-## 📌 Descrição
-Este projeto apresenta o desenvolvimento de um pipeline de dados completo (ETL) utilizando Python, com foco em automação, padronização e disponibilização de dados para análise em Power BI.
+## 📌 Overview
 
----
+This project was designed to automate and structure a complete reporting workflow using an end-to-end ETL pipeline with a Medallion Architecture approach (Bronze, Silver, Gold).
 
-## 🎯 Objetivo
-- Automatizar a extração de dados
-- Eliminar processos manuais
-- Garantir consistência e qualidade dos dados
-- Disponibilizar base analítica para BI
+The pipeline extracts data from an Oracle ERP system, performs automated transformations and validations using Python, organizes the data into layered processing stages, and automatically delivers updated Power BI dashboards.
 
 ---
 
-## ▶️ Como executar o projeto
+## 🚀 Main Features
 
-1. Navegue até a pasta `scripts`
-2. Execute:
-
-python main.py
-
-O pipeline segue o fluxo:
-Extract → Transform → Load
-
-Executado via:
-python main.py
+- Automated Oracle ERP data extraction
+- End-to-end ETL pipeline using Python
+- Medallion Architecture implementation (Bronze, Silver, Gold)
+- parquet-based layered data storage
+- Automated data validation workflows
+- Pipeline orchestration and workflow automation
+- Automated Power BI refresh and dashboard delivery
+- Reduction of manual reporting workflow from nearly one full workday to less than 6 minutes
 
 ---
 
-## 🧠 Arquitetura do Pipeline
+## 🏗️ Architecture
 
+```text
+Oracle ERP
+   ↓
+Python Extraction
+   ↓
+Bronze Layer (Raw parquet Data)
+   ↓
+Silver Layer (Validated & Cleaned Data)
+   ↓
+Gold Layer (Business-Level Data)
+   ↓
+Power BI Dashboards
 ```
-Oracle (OLTP)
-   ↓
-SQL Extraction
-   ↓
-RAW Layer
-   ↓
-Python Transformation
-   ↓
-SILVER Layer
-   ↓
-Business Rules
-   ↓
-GOLD Layer
-   ↓
-Power BI
-```
-
 ---
+ 
+## 📂 Project Structure
 
-## 🏗️ Estrutura do Projeto
-
-```
 rotatividade_kits/
 │
-├── scripts
-│   ├── extract.py
-│   ├── transform.py
-│   ├── load.py
+├── scripts/
+│   ├── extract_kits.py
+│   ├── transform_kits.py
+│   ├── load_kits.py
 │   └── main.py
 │
-├── sql
-│   └── exemplo_query.sql
+├── sql/
+│   └── example_query.sql
 │
-├── data_sample
-│   └── exemplo.csv
-```
+├── bronze/
+├── silver/
+├── gold/
+│
+├── data_sample/
+│   └── sample_data.csv
+│
+├── logs/
+│
+└── dashboard/
 
 ---
 
-## ⚙️ Tecnologias Utilizadas
+## ⚙️ Tech Stack
+
 - Python (pandas)
 - SQL
-- Oracle
+- Oracle SQL
+- parquet
 - Power BI
+- Pipeline Orchestration
+- Workflow Automation
 - Windows Task Scheduler
-- Gateway Power BI
+- Power BI Gateway
 
 ---
 
-## 🔄 Etapas do Pipeline
+## 🔄 Pipeline Stages
+1. Extract
 
-### 1. Extract
-Responsável por:
-- Leitura de query SQL
-- Simulação de execução em banco relacional
-- Geração de dados para processamento
+Responsible for:
 
-Script: `extract_kits.py`
+SQL-based extraction from Oracle ERP sources
+Query execution and data ingestion
+Initial raw data collection for processing
 
----
+Script: extract_kits.py
 
-### 2. Transform
-Responsável por:
-- Padronização de colunas
-- Tratamento de datas
-- Conversão de tipos
-- Padronização textual
+2. Transform
 
-Script: `transform_kits.py`
+Responsible for:
 
----
+Column standardization
+Date normalization
+Data type conversion
+Text standardization
+Data validation and cleaning
 
-### 3. Load
-Responsável por:
-- Aplicação de regras de negócio
-- Geração da camada GOLD
-- Disponibilização para consumo analítico
+Script: transform_kits.py
 
-Script: `load_kits.py`
+3. Load
 
----
+Responsible for:
 
-## 📊 Regras de Negócio (Resumo)
+Business rule application
+GOLD layer generation
+Analytical data delivery for Power BI consumption
 
-### Etapa 1 - Pedidos
-- Filtro de natureza fiscal conforme critérios definidos pelo negócio
-- Filtro de data a partir de 01/06/2025
-- Conversão de quantidade para inteiro
-
-### Etapa 2 - Vale de Material
-- Filtro por data de emissão
-- Criação de coluna `descricao_kit`
-
-### Etapa 3 - Cadastro de Kits
-- Filtro de locais específicos
-- Filtro de dono do kit
+Script: load_kits.py
 
 ---
 
-## ⚠️ Desafios Técnicos
-
-### 1. Inconsistência de formatos de data
-Solução:
-- Implementação de parsing com suporte a múltiplos formatos
-
-### 2. Duplicidade de registros
-Solução:
-- Revisão de chaves de relacionamento nos JOINs
-
-### 3. Inconsistência na origem de dados
-Solução:
-- Ajuste da fonte para tabela mais confiável
+## 📊 Business Logic
+- Applied filtering and validation rules based on operational business requirements
+- Standardized and consolidated data from multiple ERP sources
+- Implemented layered processing for analytical consumption
+- Structured business-ready datasets for dashboard delivery
 
 ---
 
-## 🤖 Automação
+## ⚠️ Technical Challenges
+- Handling inconsistent date formats across multiple data sources
+- Resolving duplicate records caused by relational joins
+- Standardizing inconsistent source data for reliable analytical processing
 
-O pipeline foi automatizado utilizando:
-- Executável Python (.exe)
+---
+
+## 🤖 Automation
+
+The pipeline was automated using:
+
+- Python executable (.exe)
 - Windows Task Scheduler
-- Integração com Power BI via gateway para atualização automática dos dados
+- Power BI Gateway integration for automated dashboard refresh
 
-Fluxo:
-
+Automated Workflow
 ```
-Agendador Windows
+Windows Task Scheduler
    ↓
-Execução do pipeline
+Pipeline Execution
    ↓
-Atualização dos arquivos
+Data Processing & Layer Updates
    ↓
-Power BI (Gateway)
+Power BI Gateway
    ↓
-Atualização dos dashboards
+Automated Dashboard Refresh
 ```
 
 ---
 
-## 📈 Resultado
-
-- Pipeline automatizado
-- Redução de processos manuais
-- Base padronizada para análise
-- Integração com Power BI
-
----
-
-## 💡 Considerações
-
-Este projeto demonstra a implementação de um pipeline de dados em ambiente próximo ao corporativo, com separação de camadas, aplicação de regras de negócio e automação do fluxo de dados.
+## 📈 Results
+- Reduced a fully manual reporting workflow from nearly one full workday to less than 6 minutes
+- Automated repetitive operational and reporting processes
+- Improved reporting reliability and data standardization
+- Implemented scalable layered data processing using Medallion Architecture
+- Enabled automated Power BI dashboard delivery and refresh
 
 ---
 
-## ⚠️ Observação
-
-Este projeto é uma versão adaptada para portfólio.
-Não contém dados reais ou informações sensíveis.
+## 🔮 Future Improvements
+- Airflow orchestration
+- Docker containerization
+- PostgreSQL integration
+- Cloud-based storage and processing
 
 ---
 
-## 👩‍💻 Autora
-Izabella
-Cientista de Dados
+## ⚠️ Note
 
+This repository contains an adapted portfolio version of the original project and does not include real business data or sensitive information.
