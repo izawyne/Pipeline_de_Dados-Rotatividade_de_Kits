@@ -62,6 +62,8 @@ rotatividade_kits/
 │
 └── dashboard/
 ```
+
+![Pipeline Architecture](docs/architecture.png)
 ---
 
 ## ⚙️ Tech Stack
